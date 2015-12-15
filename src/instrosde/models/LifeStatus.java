@@ -2,6 +2,7 @@ package introsde.models;
 
 import introsde.dao.LifeCoachDb_Dao;
 
+import javax.xml.bind.annotation.XmlTransient;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +46,7 @@ public class LifeStatus{
 	  return list;
 	}
 
-
+	@XmlTransient
 	public Person getPerson() {
 		return person;
 	}
@@ -55,7 +56,7 @@ public class LifeStatus{
 		this.person = person;
 	}
 
-
+	@XmlTransient
 	public MeasureDefinition getMeasureDefinition() {
 		return measureDefinition;
 	}

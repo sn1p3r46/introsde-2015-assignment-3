@@ -152,7 +152,6 @@ public class TestJunit {
    public void updatePersonMeasure(){
 
       System.out.println("\n--> TEST: updatePersonMeasure");
-
          HealthMeasureHistory hmh = new HealthMeasureHistory();
          MeasureDefinition md = MeasureDefinition.getMeasureDefinitionByName("height");
          hmh.setValue("000");

@@ -3,6 +3,8 @@ package introsde.models;
 import java.util.List;
 import javax.persistence.*;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import introsde.dao.LifeCoachDb_Dao;
 
 @Entity
@@ -51,7 +53,7 @@ public class MeasureDefinition{
 		this.measureName = measureName;
 	}
 
-
+	@XmlTransient
 	public String getMeasureType() {
 		return measureType;
 	}

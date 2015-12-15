@@ -55,6 +55,8 @@ INSERT INTO HealthMeasureHistory (idPerson, idMeasureDefinition, value, timestam
 INSERT INTO HealthMeasureHistory (idPerson, idMeasureDefinition, value, timestamp ) VALUES (2,2,"77","866073600000");
 
 
+CREATE VIEW LifeStatus AS SELECT idMeasureHistory, idPerson, idMeasureDefinition, measureName, value, MAX(timestamp) AS timestamp FROM HealthMeasureHistory NATURAL JOIN MeasureDefinition GROUP BY idPerson, idMeasureDefinition;
+
 
 
 SELECT * FROM person;
@@ -65,8 +67,6 @@ SELECT * FROM HealthMeasureHistory;
 
 
 SELECT firstname, person.idPerson, idMeasureDefinition, MeasureDefinition.measureName, HealthMeasureHistory.timestamp FROM person NATURAL JOIN (HealthMeasureHistory NATURAL JOIN MeasureDefinition);
-
-CREATE VIEW LifeStatus AS SELECT idMeasureHistory, idPerson, idMeasureDefinition, measureName, value, MAX(timestamp) AS timestamp FROM HealthMeasureHistory NATURAL JOIN MeasureDefinition GROUP BY idPerson, idMeasureDefinition;
 
 SELECT * FROM LifeStatus;
 
