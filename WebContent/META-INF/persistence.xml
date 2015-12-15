@@ -10,8 +10,7 @@
             <property name="hibernate.archive.autodetection" value="class, hbm"/>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:db.sqlite" />
-        <!--<property name="eclipselink.logging.level" value="ALL" />
-
+            <!-- <property name="eclipselink.logging.level" value="OFF" />
             <property name="eclipselink.ddl-generation" value="create-or-extend-tables" /> -->
 
         </properties>

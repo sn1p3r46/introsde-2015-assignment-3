@@ -11,7 +11,8 @@ import introsde.models.LifeStatus;
 
 public class Test{
   public static void main(String[] args) {
-    viewTest();
+    //viewTest();
+    updateMeasure();
   }
 
   private static void viewTest(){
@@ -84,5 +85,22 @@ public class Test{
       persona = lf.getPerson();
       System.out.println(persona.getFirstname());
     }
+  }
+
+  private static void updateMeasure(){
+    Person p = Person.getAllPeople().get(0);
+    HealthMeasureHistory hmh = p.getHealthMeasureHistory().get(0);
+    System.out.println(hmh.getValue());
+    hmh.setValue("987");
+    Person.savePerson(p);
+
+    p = Person.getAllPeople().get(0);
+    hmh = p.getHealthMeasureHistory().get(0);
+
+    System.out.println(hmh.getValue());
+
+
+
+
   }
 }

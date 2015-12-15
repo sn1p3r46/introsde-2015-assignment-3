@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
 
+import static java.lang.Math.toIntExact;
+
 import introsde.dao.LifeCoachDb_Dao;
 //  nice tutorial on annotations http://www.summa-tech.com/blog/2011/07/29/setting-up-sequential-ids-using-jpa-tablegenerator
 //  ORACLE docs http://docs.oracle.com/javaee/5/api/javax/persistence/TableGenerator.html
@@ -47,7 +49,7 @@ public class Person{
 
 	@OneToMany(mappedBy="person",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<HealthMeasureHistory> healthMeasureHistory;
-	
+
 	@OneToMany(mappedBy="person")
 	private List<LifeStatus> lifeStatus;
 
@@ -98,6 +100,13 @@ public class Person{
 		this.lifeStatus = lifeStatus;
 	}
 
+	public List<HealthMeasureHistory> getHealthMeasureHistory(){
+		return this.healthMeasureHistory;
+	}
+
+	public void getHealthMeasureHistory( List<HealthMeasureHistory> healthMeasureHistory){
+		this.healthMeasureHistory = healthMeasureHistory;
+	}
 	// performing method overload, this method id more user friendly for testing
 	public void setBirthday(int day, int month, int year){
 		Calendar cal = Calendar.getInstance();
@@ -106,6 +115,14 @@ public class Person{
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		this.birthday = cal.getTime();
 	}
+
+
+	public static void removePerson(Long id){
+		Person p = Person.getPersonById(toIntExact(id));
+		if(p!=null)
+			Person.removePerson(p);
+	}
+
 
 	public static void removePerson(Person p) {
 		EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
@@ -133,5 +150,24 @@ public class Person{
 		List<Person> list = em.createNamedQuery("Person.findAll", Person.class).getResultList();
 		LifeCoachDb_Dao.instance.closeConnections(em);
 		return list;
+	}
+
+	public static Person getPersonById(int id) {
+		EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
+		em.getEntityManagerFactory().getCache().evictAll();
+		Person person = em.find(Person.class, id);
+		LifeCoachDb_Dao.instance.closeConnections(em);
+		if (person==null){
+				System.out.println("The given ID is NOT in our database" + id);
+		}
+		return person;
+	}
+
+	public static HealthMeasureHistory savePersonMeasure(Long id, HealthMeasureHistory hmh){
+			Person p = Person.getPersonById(toIntExact(id));
+			hmh.setPerson(p);
+			hmh = HealthMeasureHistory.saveHealthMeasureHistory(hmh);
+
+		return hmh;
 	}
 }

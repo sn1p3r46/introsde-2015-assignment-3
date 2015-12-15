@@ -69,3 +69,6 @@ SELECT firstname, person.idPerson, idMeasureDefinition, MeasureDefinition.measur
 CREATE VIEW LifeStatus AS SELECT idMeasureHistory, idPerson, idMeasureDefinition, measureName, value, MAX(timestamp) AS timestamp FROM HealthMeasureHistory NATURAL JOIN MeasureDefinition GROUP BY idPerson, idMeasureDefinition;
 
 SELECT * FROM LifeStatus;
+
+.quit
+

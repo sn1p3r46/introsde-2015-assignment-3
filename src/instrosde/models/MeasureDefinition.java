@@ -61,6 +61,7 @@ public class MeasureDefinition{
 		this.measureType = measureType;
 	}
 
+
 	public static void removeMeasureDefinition(MeasureDefinition mdef){
 		EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -70,6 +71,7 @@ public class MeasureDefinition{
 		tx.commit();
 		LifeCoachDb_Dao.instance.closeConnections(em);
 	}
+
 
 	public static MeasureDefinition saveMeasureDefinition(MeasureDefinition mdef){
 		EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
@@ -81,6 +83,7 @@ public class MeasureDefinition{
 		return mdef;
 	}
 
+
 	public static List<MeasureDefinition> getAllMeasureDefinitions(){
 		EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
 		em.getEntityManagerFactory().getCache().evictAll();
@@ -88,6 +91,7 @@ public class MeasureDefinition{
 		LifeCoachDb_Dao.instance.closeConnections(em);
 		return list;
 	}
+
 
 	public static MeasureDefinition getMeasureDefinitionByName(String measureName) {
 		EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();

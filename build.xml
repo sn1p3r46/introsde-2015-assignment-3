@@ -15,7 +15,7 @@
        # The target "download-ivy" and "install-ivy" will download the ivy jar and place it in the "ivy" folder
        #
 -->
-    <project name="sdelab06" default="install" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+    <project name="introSDE-assignment-3" default="install" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
         <!-- PART 1: Ivy properties, download, installation and configuration -->
         <property name="ivy.install.version" value="2.4.0-rc1" />
         <property name="ivy.jar.dir" value="${basedir}/ivy" />
@@ -134,6 +134,28 @@
                     </fileset>
                 </classpath>
             </java>
+        </target>
+        <target name="start.JuniTest" depends="initDB, compile">
+            <echo message="app start introsde.JuniTest in ${build.dir}" />
+            <java classname="introsde.test.TestRunner" classpath="${build.dir}" fork="true">
+                <arg value="$JAVA_OPTS  -cp" />
+                <classpath>
+                    <path location="build" />
+                    <fileset dir="WebContent/WEB-INF/lib">
+                        <include name="**/*.jar" />
+                        <include name="*.jar" />
+                    </fileset>
+                </classpath>
+            </java>
+        </target>
+
+        <target name="initDB">
+            <echo message="REMOVING THE OLD DB AND CREATING A NEWONE" />
+            <exec executable="/bin/bash">
+                <arg value="init.sh"/>
+            </exec>
+            <echo message="DATABASE CREATED CORRECTLY" />
+
         </target>
 
         <!-- Run the JUnit Tests -->

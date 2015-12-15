@@ -2,9 +2,13 @@ package introsde.models;
 
 import introsde.dao.LifeCoachDb_Dao;
 
+import static java.lang.Math.toIntExact;
 import java.util.Date;
+import java.sql.Timestamp;
+
 import java.util.List;
 import javax.persistence.*;
+
 
 @Entity
 @Table(name="HealthMeasureHistory")
@@ -122,5 +126,67 @@ public class HealthMeasureHistory{
 	    em.remove(hmh);
 	    tx.commit();
 	    LifeCoachDb_Dao.instance.closeConnections(em);
+		}
+
+		public static List<HealthMeasureHistory> readPersonHistory(Long id, String measureType){
+			Person p = Person.getPersonById(toIntExact(id));
+			MeasureDefinition md = MeasureDefinition.getMeasureDefinitionByName(measureType);
+			if(p==null || md == null){
+				return null;
+			}
+			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
+			TypedQuery<HealthMeasureHistory> query = em.createNamedQuery("HealthMeasureHistory.findByMeasureAndPerson", HealthMeasureHistory.class);
+			query.setParameter(1, p);
+			query.setParameter(2, md);
+			List<HealthMeasureHistory> list = query.getResultList();
+			LifeCoachDb_Dao.instance.closeConnections(em);
+			return list;
+		}
+
+		public static HealthMeasureHistory getHealthMeasureHistoryByPidAndMid(Long idPerson,String measureType, int mid) {
+			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
+			Person p = Person.getPersonById(toIntExact(idPerson));
+
+			TypedQuery<HealthMeasureHistory> query = em.createNamedQuery("HealthMeasureHistory.findByPidAndMid", HealthMeasureHistory.class);
+			query.setParameter(1, p);
+			query.setParameter(2, mid);
+
+			List<HealthMeasureHistory> hmh = query.getResultList();
+
+			LifeCoachDb_Dao.instance.closeConnections(em);
+
+			HealthMeasureHistory hmhNonList = hmh.get(0);
+			if(hmhNonList!=null && hmhNonList.getMeasureDefinition().getMeasureName().equals(measureType)){
+					return hmhNonList;
+			} else {
+				System.out.println("INCONSISTENCY IN PARAMETERS GIVEN EXACTLY BETWEEN MID AND MEASURE NAME");
+				return null;
+			}
+		}
+
+		public static HealthMeasureHistory savePersonMeasure(Long id, HealthMeasureHistory hmh){
+			Person p = Person.getPersonById(toIntExact(id));
+			if(p!=null){
+				Date date = new Date();
+				Timestamp ts = new Timestamp(date.getTime());
+				hmh.setTimestamp(ts);
+				hmh.setPerson(p);
+				hmh = HealthMeasureHistory.saveHealthMeasureHistory(hmh);
+				return hmh;
+			}
+			return null;
+		}
+
+		// actually this method is the same of savePersonMeasure.. because the DB FUNCTION IS THE SAME BOTH FOR SAVING OR UPDATING.. :)
+		public static HealthMeasureHistory updatePersonMeasure(Long id, HealthMeasureHistory hmh){
+			Person p = Person.getPersonById(toIntExact(id));
+			if(p!=null){
+				Date date = new Date();
+				Timestamp ts = new Timestamp(date.getTime());
+				hmh.setTimestamp(ts);
+				hmh.setPerson(p);
+				return HealthMeasureHistory.saveHealthMeasureHistory(hmh);
+			}
+			return null;
 		}
 	}
