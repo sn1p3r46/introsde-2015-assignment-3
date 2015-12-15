@@ -107,6 +107,7 @@ public class HealthMeasureHistory{
 	    return list;
 		}
 
+
 		// Save Or Update
 		public static HealthMeasureHistory saveHealthMeasureHistory(HealthMeasureHistory hmh) {
 			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
@@ -117,6 +118,7 @@ public class HealthMeasureHistory{
 		  LifeCoachDb_Dao.instance.closeConnections(em);
 		  return hmh;
 		}
+
 		// removes the entity from the DB
 		public static void removeHealthMeasureHistory(HealthMeasureHistory hmh) {
 			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
@@ -127,6 +129,7 @@ public class HealthMeasureHistory{
 	    tx.commit();
 	    LifeCoachDb_Dao.instance.closeConnections(em);
 		}
+
 
 		public static List<HealthMeasureHistory> readPersonHistory(Long id, String measureType){
 			Person p = Person.getPersonById(toIntExact(id));
@@ -143,13 +146,14 @@ public class HealthMeasureHistory{
 			return list;
 		}
 
-		public static HealthMeasureHistory getHealthMeasureHistoryByPidAndMid(Long idPerson,String measureType, int mid) {
+
+		public static HealthMeasureHistory getHealthMeasureHistoryByPidAndMid(Long idPerson,String measureType, Long mid) {
 			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
 			Person p = Person.getPersonById(toIntExact(idPerson));
 
 			TypedQuery<HealthMeasureHistory> query = em.createNamedQuery("HealthMeasureHistory.findByPidAndMid", HealthMeasureHistory.class);
 			query.setParameter(1, p);
-			query.setParameter(2, mid);
+			query.setParameter(2, toIntExact(mid));
 
 			List<HealthMeasureHistory> hmh = query.getResultList();
 
@@ -164,6 +168,7 @@ public class HealthMeasureHistory{
 			}
 		}
 
+
 		public static HealthMeasureHistory savePersonMeasure(Long id, HealthMeasureHistory hmh){
 			Person p = Person.getPersonById(toIntExact(id));
 			if(p!=null){
@@ -176,6 +181,7 @@ public class HealthMeasureHistory{
 			}
 			return null;
 		}
+
 
 		// actually this method is the same of savePersonMeasure.. because the DB FUNCTION IS THE SAME BOTH FOR SAVING OR UPDATING.. :)
 		public static HealthMeasureHistory updatePersonMeasure(Long id, HealthMeasureHistory hmh){

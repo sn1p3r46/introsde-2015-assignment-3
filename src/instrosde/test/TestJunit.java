@@ -129,7 +129,7 @@ public class TestJunit {
    public void readPersonMeasure(){
       System.out.println("\n--> TEST: readPersonMeasure");
 
-      HealthMeasureHistory hmh = HealthMeasureHistory.getHealthMeasureHistoryByPidAndMid(1L,"height",1);
+      HealthMeasureHistory hmh = HealthMeasureHistory.getHealthMeasureHistoryByPidAndMid(1L,"height",1L);
       assertNotNull(hmh);
    }
 
