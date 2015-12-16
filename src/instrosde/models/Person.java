@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import static java.lang.Math.toIntExact;
 
 import introsde.dao.LifeCoachDb_Dao;
@@ -50,7 +52,9 @@ public class Person{
 	@OneToMany(mappedBy="person",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<HealthMeasureHistory> healthMeasureHistory;
 
-	@OneToMany(mappedBy="person")
+	// @OneToMany(mappedBy="person")
+	@OneToMany(targetEntity=LifeStatus.class, cascade={})
+	@JoinColumn(name="idPerson", referencedColumnName="idPerson", nullable=false, updatable=false, insertable=false)
 	private List<LifeStatus> lifeStatus;
 
 	public int getIdPerson() {
@@ -100,11 +104,12 @@ public class Person{
 		this.lifeStatus = lifeStatus;
 	}
 
+
 	public List<HealthMeasureHistory> getHealthMeasureHistory(){
 		return this.healthMeasureHistory;
 	}
 
-	public void getHealthMeasureHistory( List<HealthMeasureHistory> healthMeasureHistory){
+	public void setHealthMeasureHistory( List<HealthMeasureHistory> healthMeasureHistory){
 		this.healthMeasureHistory = healthMeasureHistory;
 	}
 	// performing method overload, this method id more user friendly for testing

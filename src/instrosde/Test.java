@@ -12,7 +12,9 @@ import introsde.models.LifeStatus;
 public class Test{
   public static void main(String[] args) {
     //viewTest();
-    updateMeasure();
+    //updateMeasure();
+    updatePerson();
+
   }
 
   private static void viewTest(){
@@ -98,9 +100,22 @@ public class Test{
     hmh = p.getHealthMeasureHistory().get(0);
 
     System.out.println(hmh.getValue());
-
-
-
-
   }
+
+    public static void updatePerson(){
+       System.out.println("\n--> TEST: updatePerson");
+       Person person = Person.getAllPeople().get(1);
+
+       person.setHealthMeasureHistory(Person.getAllPeople().get(2).getHealthMeasureHistory());
+      // if(Person.getAllPeople().get(2).getHealthMeasureHistory()==null)
+        System.out.println(Person.getAllPeople().get(0).getHealthMeasureHistory().size());
+       //System.out.println(person.getLifeStatus().size());
+       String oldName = person.getFirstname();
+       System.out.println(oldName);
+       person.setFirstname( new StringBuffer(oldName).reverse().toString());
+       person = Person.savePerson(person);
+
+       System.out.println(person.getFirstname());
+       //assertFalse(person.getFirstname().equals(oldName));
+    }
 }

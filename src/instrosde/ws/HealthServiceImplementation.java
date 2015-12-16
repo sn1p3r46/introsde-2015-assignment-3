@@ -26,7 +26,13 @@ public class HealthServiceImplementation implements HealthServiceInterface{
   // M #3
   @Override
   public Person updatePerson(Person p){
-    return Person.savePerson(p);
+    //p.setHealthMeasureHistory(null);
+    Person per = Person.getPersonById(p.getIdPerson());
+    per.setFirstname(p.getFirstname());
+    per.setLastname(p.getLastname());
+    per.setBirthday(p.getBirthday());
+
+    return Person.savePerson(per);
   }
   // M #4
   @Override
@@ -56,6 +62,7 @@ public class HealthServiceImplementation implements HealthServiceInterface{
   // M #9
   @Override
   public HealthMeasureHistory savePersonMeasure(Long id, HealthMeasureHistory m){
+    m.setMeasureDefinition(MeasureDefinition.getMeasureDefinitionByName(m.getMeasureDefinition().getMeasureName()));  
     return HealthMeasureHistory.savePersonMeasure(id, m);
   }
   // M #10

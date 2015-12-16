@@ -6,6 +6,8 @@ import static java.lang.Math.toIntExact;
 import java.util.Date;
 import java.sql.Timestamp;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.util.List;
 import javax.persistence.*;
 
@@ -79,7 +81,7 @@ public class HealthMeasureHistory{
 			this.timestamp = timestamp;
 		}
 
-
+		@XmlTransient
 		public Person getPerson() {
 			return person;
 		}
@@ -187,9 +189,11 @@ public class HealthMeasureHistory{
 		public static HealthMeasureHistory updatePersonMeasure(Long id, HealthMeasureHistory hmh){
 			Person p = Person.getPersonById(toIntExact(id));
 			if(p!=null){
+				if(hmh.getTimestamp()==null){
 				Date date = new Date();
 				Timestamp ts = new Timestamp(date.getTime());
 				hmh.setTimestamp(ts);
+				}
 				hmh.setPerson(p);
 				return HealthMeasureHistory.saveHealthMeasureHistory(hmh);
 			}

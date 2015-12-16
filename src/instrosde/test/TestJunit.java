@@ -15,6 +15,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+
+
 public class TestJunit {
 
    private int pid;
@@ -70,7 +72,9 @@ public class TestJunit {
    @Test
    public void updatePerson(){
       System.out.println("\n--> TEST: updatePerson");
-      Person person = Person.getAllPeople().get(Person.getAllPeople().size()-1);
+      Person person = Person.getAllPeople().get(1);
+      person.setLifeStatus(null);
+      System.out.println(person.getLifeStatus().size());
       String oldName = person.getFirstname();
       System.out.println(oldName);
       person.setFirstname( new StringBuffer(oldName).reverse().toString());

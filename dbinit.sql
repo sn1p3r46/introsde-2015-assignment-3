@@ -26,9 +26,9 @@ CREATE TABLE HealthMeasureHistory(
 
 
 
-INSERT INTO person (idPerson, firstname, lastname, birthdate) VALUES ( 1 ,"andrea","galloni","725670000000");
-INSERT INTO person (idPerson, firstname, lastname, birthdate) VALUES ( 2 ,"edoardo","galloni","520732800000");
-INSERT INTO person (idPerson, firstname, lastname, birthdate) VALUES ( 3 ,"guido","galloni", "-488332800000");
+INSERT INTO person (idPerson, firstname, lastname, birthdate) VALUES ( 1 ,"Andrea","galloni","725670000000");
+INSERT INTO person (idPerson, firstname, lastname, birthdate) VALUES ( 2 ,"Edoardo","galloni","520732800000");
+INSERT INTO person (idPerson, firstname, lastname, birthdate) VALUES ( 3 ,"Guido","galloni", "-488332800000");
 INSERT INTO person (firstname, lastname, birthdate) 		  VALUES ("Giacomo","Mene","771379200000");
 
 
