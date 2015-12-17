@@ -29,6 +29,7 @@ public class MeasureDefinition{
 
   @Column(name="measureType")
   private String measureType;
+	
   @Column(name="measureValueType")
   private String measureValueType;
 

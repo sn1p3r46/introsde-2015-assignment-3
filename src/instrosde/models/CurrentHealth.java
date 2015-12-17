@@ -32,8 +32,11 @@ public class CurrentHealth{
   @Column(name="measureType")
   private String measureType;
 
-  @Column(name="measureValue")
+	@Column(name="measureValue")
   private String measureValue;
+
+	@Column(name="measureValueType")
+	private String measureValueType;
 
 	@Temporal(TemporalType.DATE)  							// indicates to the persistency manager that this is a Date field
   @Column(name="dateRegistered")
@@ -67,12 +70,12 @@ public class CurrentHealth{
 	}
 
 
-	public String getMeasureValueType() {
+	public String getMeasureType() {
 		return measureType;
 	}
 
 
-	public void setMeasureValueType(String measureType) {
+	public void setMeasureType(String measureType) {
 		this.measureType = measureType;
 	}
 
@@ -84,6 +87,15 @@ public class CurrentHealth{
 
 	public void setMeasureValue(String measureValue) {
 		this.measureValue = measureValue;
+	}
+
+	public String getMeasureValueType() {
+		return measureValueType;
+	}
+
+
+	public void setMeasureValueType(String measureValueType) {
+		this.measureValueType = measureValueType;
 	}
 
 

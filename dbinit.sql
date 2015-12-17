@@ -55,7 +55,7 @@ INSERT INTO Measure (idPerson, idMeasureDefinition, measureValue, dateRegistered
 INSERT INTO Measure (idPerson, idMeasureDefinition, measureValue, dateRegistered ) VALUES (2,2,"77","866073600000");
 
 
-CREATE VIEW CurrentHealth AS SELECT idMeasureHistory, idPerson, idMeasureDefinition, measureType, measureValue, MAX(dateRegistered) AS dateRegistered FROM Measure NATURAL JOIN MeasureDefinition GROUP BY idPerson, idMeasureDefinition;
+CREATE VIEW CurrentHealth AS SELECT idMeasureHistory, idPerson, idMeasureDefinition, measureType, measureValue, measureValueType, MAX(dateRegistered) AS dateRegistered FROM Measure NATURAL JOIN MeasureDefinition GROUP BY idPerson, idMeasureDefinition;
 
 
 

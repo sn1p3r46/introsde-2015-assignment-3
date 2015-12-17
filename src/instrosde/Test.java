@@ -23,7 +23,7 @@ public class Test{
       System.out.println(per.getLastname() + " " + per.getFirstname());
       List<CurrentHealth> lfList = per.getCurrentHealth();
       for(CurrentHealth lf : lfList){
-        System.out.println(lf.getMeasureValueType() + " " + lf.getMeasureValue() + " " + lf.getDateRegistered().getYear() + " " + lf.getDateRegistered());
+        System.out.println(lf.getMeasureType() + " " + lf.getMeasureValue() + " " + lf.getDateRegistered().getYear() + " " + lf.getDateRegistered());
       }
     }
   }
@@ -75,14 +75,14 @@ public class Test{
 
     p = personList.get(0);
     System.out.println(p.getFirstname());
-    System.out.println(p.getCurrentHealth().get(0).getMeasureValueType());
+    System.out.println(p.getCurrentHealth().get(0).getMeasureType());
 
     Person.removePerson(p);
 
     Person persona;
     List<CurrentHealth> lfList = CurrentHealth.getAll();
     for(CurrentHealth lf : lfList){
-      System.out.println(lf.getMeasureValueType());
+      System.out.println(lf.getMeasureType());
       System.out.println(lf.getMeasureValue());
       persona = lf.getPerson();
       System.out.println(persona.getFirstname());
