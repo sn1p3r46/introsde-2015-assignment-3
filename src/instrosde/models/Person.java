@@ -50,12 +50,13 @@ public class Person{
   private Date birthday;
 
 	@OneToMany(mappedBy="person",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private List<HealthMeasureHistory> healthMeasureHistory;
+	@JoinColumn(name="idPerson", referencedColumnName="idPerson")
+	private List<Measure> healthHistory;
 
 	// @OneToMany(mappedBy="person")
-	@OneToMany(targetEntity=LifeStatus.class, cascade={})
+	@OneToMany(targetEntity=CurrentHealth.class, cascade={})
 	@JoinColumn(name="idPerson", referencedColumnName="idPerson", nullable=false, updatable=false, insertable=false)
-	private List<LifeStatus> lifeStatus;
+	private List<CurrentHealth> currentHealth;
 
 	public int getIdPerson() {
 		return idPerson;
@@ -96,21 +97,21 @@ public class Person{
 		this.birthday = birthday;
 	}
 
-	public List<LifeStatus> getLifeStatus(){
-		return this.lifeStatus;
+	public List<CurrentHealth> getCurrentHealth(){
+		return this.currentHealth;
 	}
 
-	public void setLifeStatus(List<LifeStatus> lifeStatus){
-		this.lifeStatus = lifeStatus;
+	public void setCurrentHealth(List<CurrentHealth> currentHealth){
+		this.currentHealth = currentHealth;
 	}
 
 
-	public List<HealthMeasureHistory> getHealthMeasureHistory(){
-		return this.healthMeasureHistory;
+	public List<Measure> getMeasure(){
+		return this.healthHistory;
 	}
 
-	public void setHealthMeasureHistory( List<HealthMeasureHistory> healthMeasureHistory){
-		this.healthMeasureHistory = healthMeasureHistory;
+	public void setMeasure( List<Measure> healthHistory){
+		this.healthHistory = healthHistory;
 	}
 	// performing method overload, this method id more user friendly for testing
 	public void setBirthday(int day, int month, int year){
@@ -168,10 +169,10 @@ public class Person{
 		return person;
 	}
 
-	public static HealthMeasureHistory savePersonMeasure(Long id, HealthMeasureHistory hmh){
+	public static Measure savePersonMeasure(Long id, Measure hmh){
 			Person p = Person.getPersonById(toIntExact(id));
 			hmh.setPerson(p);
-			hmh = HealthMeasureHistory.saveHealthMeasureHistory(hmh);
+			hmh = Measure.saveMeasure(hmh);
 
 		return hmh;
 	}

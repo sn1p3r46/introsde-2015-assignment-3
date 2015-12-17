@@ -13,15 +13,15 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name="HealthMeasureHistory")
+@Table(name="Measure")
 @NamedQueries({
-	@NamedQuery(name="HealthMeasureHistory.findAll", query="SELECT h FROM HealthMeasureHistory h"),
-	@NamedQuery(name="HealthMeasureHistory.findByMeasureAndPerson", query="SELECT hmh FROM HealthMeasureHistory hmh WHERE hmh.person = ?1 AND hmh.measureDefinition = ?2"),
-	@NamedQuery(name="HealthMeasureHistory.findByPidAndMid", query="SELECT hmh FROM HealthMeasureHistory hmh WHERE hmh.person = ?1 AND hmh.idMeasureHistory = ?2"),
-	@NamedQuery(name="HealthMeasureHistory.findMeasureByDate", query="SELECT hmh FROM HealthMeasureHistory hmh WHERE hmh.person = ?1 AND hmh.measureDefinition = ?2 "
-	+ "AND hmh.timestamp BETWEEN ?4 AND ?3")
+	@NamedQuery(name="Measure.findAll", query="SELECT h FROM Measure h"),
+	@NamedQuery(name="Measure.findByMeasureAndPerson", query="SELECT hmh FROM Measure hmh WHERE hmh.person = ?1 AND hmh.measureDefinition = ?2"),
+	@NamedQuery(name="Measure.findByPidAndMid", query="SELECT hmh FROM Measure hmh WHERE hmh.person = ?1 AND hmh.idMeasureHistory = ?2"),
+	@NamedQuery(name="Measure.findMeasureByDate", query="SELECT hmh FROM Measure hmh WHERE hmh.person = ?1 AND hmh.measureDefinition = ?2 "
+	+ "AND hmh.dateRegistered BETWEEN ?4 AND ?3")
 })
-public class HealthMeasureHistory{
+public class Measure{
 
     @Id
     @GeneratedValue(
@@ -31,18 +31,18 @@ public class HealthMeasureHistory{
         table="sqlite_sequence",                         // the name of the table where are stored sequences values
           pkColumnName="name",                           // name of the primary key (Optional)
         valueColumnName="seq",                           // the Column containing the actual value of the counter
-          pkColumnValue="HealthMeasureHistory",          // the name of the Column related to the sequence to autoincrement
+          pkColumnValue="Measure",          // the name of the Column related to the sequence to autoincrement
         allocationSize=1								 // Increments the cointer by one during the insertion
         )
     @Column(name="idMeasureHistory")
     private int idMeasureHistory;
 
-    @Column(name="value")
-    private String value;
+    @Column(name="measureValue")
+    private String measureValue;
 
 		@Temporal(TemporalType.DATE)
-    @Column(name="timestamp")
-    private Date timestamp;
+    @Column(name="dateRegistered")
+    private Date dateRegistered;
 
 		@ManyToOne
 		@JoinColumn( name = "idPerson", referencedColumnName = "idPerson")
@@ -62,23 +62,23 @@ public class HealthMeasureHistory{
 		}
 
 
-		public String getValue() {
-			return value;
+		public String getMeasureValue() {
+			return measureValue;
 		}
 
 
-		public void setValue(String value) {
-			this.value = value;
+		public void setMeasureValue(String measureValue) {
+			this.measureValue = measureValue;
 		}
 
 
-		public Date getTimestamp() {
-			return timestamp;
+		public Date getDateRegistered() {
+			return dateRegistered;
 		}
 
 
-		public void setTimestamp(Date timestamp) {
-			this.timestamp = timestamp;
+		public void setDateRegistered(Date dateRegistered) {
+			this.dateRegistered = dateRegistered;
 		}
 
 		@XmlTransient
@@ -102,16 +102,16 @@ public class HealthMeasureHistory{
 		}
 
 
-		public static List<HealthMeasureHistory> getAll() {
+		public static List<Measure> getAll() {
 			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
-	    List<HealthMeasureHistory> list = em.createNamedQuery("HealthMeasureHistory.findAll", HealthMeasureHistory.class).getResultList();
+	    List<Measure> list = em.createNamedQuery("Measure.findAll", Measure.class).getResultList();
 	    LifeCoachDb_Dao.instance.closeConnections(em);
 	    return list;
 		}
 
 
 		// Save Or Update
-		public static HealthMeasureHistory saveHealthMeasureHistory(HealthMeasureHistory hmh) {
+		public static Measure saveMeasure(Measure hmh) {
 			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
@@ -122,7 +122,7 @@ public class HealthMeasureHistory{
 		}
 
 		// removes the entity from the DB
-		public static void removeHealthMeasureHistory(HealthMeasureHistory hmh) {
+		public static void removeMeasure(Measure hmh) {
 			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
@@ -133,36 +133,36 @@ public class HealthMeasureHistory{
 		}
 
 
-		public static List<HealthMeasureHistory> readPersonHistory(Long id, String measureType){
+		public static List<Measure> readPersonHistory(Long id, String measureType){
 			Person p = Person.getPersonById(toIntExact(id));
 			MeasureDefinition md = MeasureDefinition.getMeasureDefinitionByName(measureType);
 			if(p==null || md == null){
 				return null;
 			}
 			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
-			TypedQuery<HealthMeasureHistory> query = em.createNamedQuery("HealthMeasureHistory.findByMeasureAndPerson", HealthMeasureHistory.class);
+			TypedQuery<Measure> query = em.createNamedQuery("Measure.findByMeasureAndPerson", Measure.class);
 			query.setParameter(1, p);
 			query.setParameter(2, md);
-			List<HealthMeasureHistory> list = query.getResultList();
+			List<Measure> list = query.getResultList();
 			LifeCoachDb_Dao.instance.closeConnections(em);
 			return list;
 		}
 
 
-		public static HealthMeasureHistory getHealthMeasureHistoryByPidAndMid(Long idPerson,String measureType, Long mid) {
+		public static Measure getMeasureByPidAndMid(Long idPerson,String measureType, Long mid) {
 			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
 			Person p = Person.getPersonById(toIntExact(idPerson));
 
-			TypedQuery<HealthMeasureHistory> query = em.createNamedQuery("HealthMeasureHistory.findByPidAndMid", HealthMeasureHistory.class);
+			TypedQuery<Measure> query = em.createNamedQuery("Measure.findByPidAndMid", Measure.class);
 			query.setParameter(1, p);
 			query.setParameter(2, toIntExact(mid));
 
-			List<HealthMeasureHistory> hmh = query.getResultList();
+			List<Measure> hmh = query.getResultList();
 
 			LifeCoachDb_Dao.instance.closeConnections(em);
 
-			HealthMeasureHistory hmhNonList = hmh.get(0);
-			if(hmhNonList!=null && hmhNonList.getMeasureDefinition().getMeasureName().equals(measureType)){
+			Measure hmhNonList = hmh.get(0);
+			if(hmhNonList!=null && hmhNonList.getMeasureDefinition().getMeasureType().equals(measureType)){
 					return hmhNonList;
 			} else {
 				System.out.println("INCONSISTENCY IN PARAMETERS GIVEN EXACTLY BETWEEN MID AND MEASURE NAME");
@@ -171,14 +171,14 @@ public class HealthMeasureHistory{
 		}
 
 
-		public static HealthMeasureHistory savePersonMeasure(Long id, HealthMeasureHistory hmh){
+		public static Measure savePersonMeasure(Long id, Measure hmh){
 			Person p = Person.getPersonById(toIntExact(id));
 			if(p!=null){
 				Date date = new Date();
 				Timestamp ts = new Timestamp(date.getTime());
-				hmh.setTimestamp(ts);
+				hmh.setDateRegistered(ts);
 				hmh.setPerson(p);
-				hmh = HealthMeasureHistory.saveHealthMeasureHistory(hmh);
+				hmh = Measure.saveMeasure(hmh);
 				return hmh;
 			}
 			return null;
@@ -186,16 +186,16 @@ public class HealthMeasureHistory{
 
 
 		// actually this method is the same of savePersonMeasure.. because the DB FUNCTION IS THE SAME BOTH FOR SAVING OR UPDATING.. :)
-		public static HealthMeasureHistory updatePersonMeasure(Long id, HealthMeasureHistory hmh){
+		public static Measure updatePersonMeasure(Long id, Measure hmh){
 			Person p = Person.getPersonById(toIntExact(id));
 			if(p!=null){
-				if(hmh.getTimestamp()==null){
+				if(hmh.getDateRegistered()==null){
 				Date date = new Date();
 				Timestamp ts = new Timestamp(date.getTime());
-				hmh.setTimestamp(ts);
+				hmh.setDateRegistered(ts);
 				}
 				hmh.setPerson(p);
-				return HealthMeasureHistory.saveHealthMeasureHistory(hmh);
+				return Measure.saveMeasure(hmh);
 			}
 			return null;
 		}

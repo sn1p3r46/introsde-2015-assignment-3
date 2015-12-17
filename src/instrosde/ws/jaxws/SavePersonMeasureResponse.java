@@ -13,23 +13,23 @@ import javax.xml.bind.annotation.XmlType;
 public class SavePersonMeasureResponse {
 
     @XmlElement(name = "return", namespace = "")
-    private introsde.models.HealthMeasureHistory _return;
+    private introsde.models.Measure _return;
 
     /**
-     * 
+     *
      * @return
-     *     returns HealthMeasureHistory
+     *     returns Measure
      */
-    public introsde.models.HealthMeasureHistory getReturn() {
+    public introsde.models.Measure getReturn() {
         return this._return;
     }
 
     /**
-     * 
+     *
      * @param _return
      *     the value for the _return property
      */
-    public void setReturn(introsde.models.HealthMeasureHistory _return) {
+    public void setReturn(introsde.models.Measure _return) {
         this._return = _return;
     }
 

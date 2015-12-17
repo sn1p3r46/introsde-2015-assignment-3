@@ -6,7 +6,7 @@ import javax.jws.WebService;
 import java.util.List;
 
 import introsde.models.Person;
-import introsde.models.HealthMeasureHistory;
+import introsde.models.Measure;
 import introsde.models.MeasureDefinition;
 
 
@@ -26,7 +26,7 @@ public class HealthServiceImplementation implements HealthServiceInterface{
   // M #3
   @Override
   public Person updatePerson(Person p){
-    //p.setHealthMeasureHistory(null);
+    //p.setMeasure(null);
     Person per = Person.getPersonById(p.getIdPerson());
     per.setFirstname(p.getFirstname());
     per.setLastname(p.getLastname());
@@ -46,8 +46,8 @@ public class HealthServiceImplementation implements HealthServiceInterface{
   }
   // M #6
   @Override
-  public List<HealthMeasureHistory> readPersonHistory(Long id, String measureType){
-    return HealthMeasureHistory.readPersonHistory(id, measureType);
+  public List<Measure> readPersonHistory(Long id, String measureType){
+    return Measure.readPersonHistory(id, measureType);
   }
   // M #7
   @Override
@@ -56,18 +56,18 @@ public class HealthServiceImplementation implements HealthServiceInterface{
   }
   // M #8
   @Override
-  public HealthMeasureHistory readPersonMeasure(Long id, String measureType, Long mid){
-    return HealthMeasureHistory.getHealthMeasureHistoryByPidAndMid(id,measureType, mid);
+  public Measure readPersonMeasure(Long id, String measureType, Long mid){
+    return Measure.getMeasureByPidAndMid(id,measureType, mid);
   }
   // M #9
   @Override
-  public HealthMeasureHistory savePersonMeasure(Long id, HealthMeasureHistory m){
-    m.setMeasureDefinition(MeasureDefinition.getMeasureDefinitionByName(m.getMeasureDefinition().getMeasureName()));  
-    return HealthMeasureHistory.savePersonMeasure(id, m);
+  public Measure savePersonMeasure(Long id, Measure m){
+    m.setMeasureDefinition(MeasureDefinition.getMeasureDefinitionByName(m.getMeasureDefinition().getMeasureType()));
+    return Measure.savePersonMeasure(id, m);
   }
   // M #10
   @Override
-  public HealthMeasureHistory updatePersonMeasure(Long id, HealthMeasureHistory m){
-    return HealthMeasureHistory.updatePersonMeasure(id,m);
+  public Measure updatePersonMeasure(Long id, Measure m){
+    return Measure.updatePersonMeasure(id,m);
   }
 }

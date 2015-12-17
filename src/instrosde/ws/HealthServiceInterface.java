@@ -9,7 +9,7 @@ import javax.jws.soap.SOAPBinding.Use;
 import java.util.List;
 
 import introsde.models.Person;
-import introsde.models.HealthMeasureHistory;
+import introsde.models.Measure;
 import introsde.models.MeasureDefinition;
 
 //Service Endpoint Interface
@@ -27,13 +27,13 @@ public interface HealthServiceInterface{
     // M #5
     @WebMethod void deletePerson(Long id);
     // M #6
-    @WebMethod List<HealthMeasureHistory> readPersonHistory(Long id, String measureType);
+    @WebMethod List<Measure> readPersonHistory(Long id, String measureType);
     // M #7
     @WebMethod List<MeasureDefinition> readMeasureTypes();
     // M #8
-    @WebMethod HealthMeasureHistory readPersonMeasure(Long id, String measureType, Long mid);
+    @WebMethod Measure readPersonMeasure(Long id, String measureType, Long mid);
     // M #9
-    @WebMethod HealthMeasureHistory savePersonMeasure(Long id, HealthMeasureHistory m);
+    @WebMethod Measure savePersonMeasure(Long id, Measure m);
     // M #10
-    @WebMethod HealthMeasureHistory updatePersonMeasure(Long id, HealthMeasureHistory m);
+    @WebMethod Measure updatePersonMeasure(Long id, Measure m);
 }

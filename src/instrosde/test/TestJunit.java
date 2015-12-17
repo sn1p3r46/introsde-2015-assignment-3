@@ -1,7 +1,7 @@
 package introsde.test;
 
 import introsde.models.Person;
-import introsde.models.HealthMeasureHistory;
+import introsde.models.Measure;
 import introsde.models.MeasureDefinition;
 
 import static org.junit.Assert.*;
@@ -73,8 +73,8 @@ public class TestJunit {
    public void updatePerson(){
       System.out.println("\n--> TEST: updatePerson");
       Person person = Person.getAllPeople().get(1);
-      person.setLifeStatus(null);
-      System.out.println(person.getLifeStatus().size());
+      //person.setCurrentHealth(null);
+      System.out.println(person.getCurrentHealth().size());
       String oldName = person.getFirstname();
       System.out.println(oldName);
       person.setFirstname( new StringBuffer(oldName).reverse().toString());
@@ -99,23 +99,23 @@ public class TestJunit {
       System.out.println("\n--> TEST: updateMeasure");
 
       Person p = Person.getAllPeople().get(0);
-      HealthMeasureHistory hmh = p.getHealthMeasureHistory().get(0);
-      String oldValue = hmh.getValue() + "10";
+      Measure hmh = p.getMeasure().get(0);
+      String oldValue = hmh.getMeasureValue() + "10";
       System.out.println("[OLD VALUE] : " + oldValue);
 
-      hmh.setValue(new StringBuffer(oldValue).reverse().toString());
+      hmh.setMeasureValue(new StringBuffer(oldValue).reverse().toString());
       Person.savePerson(p);
 
       p = Person.getAllPeople().get(0);
-      hmh = p.getHealthMeasureHistory().get(0);
-      System.out.println("[NEW VALUE] : " + hmh.getValue());
-      assertFalse(hmh.getValue().equals(oldValue));
+      hmh = p.getMeasure().get(0);
+      System.out.println("[NEW VALUE] : " + hmh.getMeasureValue());
+      assertFalse(hmh.getMeasureValue().equals(oldValue));
    }
 
    @Test
    public void readPersonHistory(){
       System.out.println("\n--> TEST: readPersonHistory");
-      List<HealthMeasureHistory> hmh = HealthMeasureHistory.readPersonHistory(1L,"height");
+      List<Measure> hmh = Measure.readPersonHistory(1L,"height");
       if(hmh!=null){
          System.out.println("hmh List dimension: " + hmh.size());
       }
@@ -133,7 +133,7 @@ public class TestJunit {
    public void readPersonMeasure(){
       System.out.println("\n--> TEST: readPersonMeasure");
 
-      HealthMeasureHistory hmh = HealthMeasureHistory.getHealthMeasureHistoryByPidAndMid(1L,"height",1L);
+      Measure hmh = Measure.getMeasureByPidAndMid(1L,"height",1L);
       assertNotNull(hmh);
    }
 
@@ -142,11 +142,11 @@ public class TestJunit {
 
       System.out.println("\n--> TEST: savePersonMeasure");
 
-         HealthMeasureHistory hmh = new HealthMeasureHistory();
+         Measure hmh = new Measure();
          MeasureDefinition md = MeasureDefinition.getMeasureDefinitionByName("height");
-         hmh.setValue("000");
+         hmh.setMeasureValue("000");
          hmh.setMeasureDefinition(md);
-         hmh = HealthMeasureHistory.savePersonMeasure(1L,hmh);
+         hmh = Measure.savePersonMeasure(1L,hmh);
 
          assertTrue(hmh.getIdMeasureHistory() != 0);
    }
@@ -156,16 +156,16 @@ public class TestJunit {
    public void updatePersonMeasure(){
 
       System.out.println("\n--> TEST: updatePersonMeasure");
-         HealthMeasureHistory hmh = new HealthMeasureHistory();
+         Measure hmh = new Measure();
          MeasureDefinition md = MeasureDefinition.getMeasureDefinitionByName("height");
-         hmh.setValue("000");
+         hmh.setMeasureValue("000");
          hmh.setMeasureDefinition(md);
-         hmh = HealthMeasureHistory.savePersonMeasure(1L,hmh);
-         System.out.println(hmh.getValue());
-         hmh.setValue("129");
-         hmh = HealthMeasureHistory.updatePersonMeasure(1L,hmh);
-         System.out.println(hmh.getValue());
-         assertTrue(hmh.getValue().equals("129"));
+         hmh = Measure.savePersonMeasure(1L,hmh);
+         System.out.println(hmh.getMeasureValue());
+         hmh.setMeasureValue("129");
+         hmh = Measure.updatePersonMeasure(1L,hmh);
+         System.out.println(hmh.getMeasureValue());
+         assertTrue(hmh.getMeasureValue().equals("129"));
    }
 
 

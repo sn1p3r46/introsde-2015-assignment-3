@@ -11,7 +11,7 @@ import introsde.dao.LifeCoachDb_Dao;
 @Table(name="MeasureDefinition")
 @NamedQueries({
 	@NamedQuery(name="MeasureDefinition.findAll", query="SELECT m FROM MeasureDefinition m"),
-	@NamedQuery(name="MeasureDefinition.getMeasureDefinitionByName", query="SELECT d FROM MeasureDefinition d WHERE d.measureName = ?1 ")
+	@NamedQuery(name="MeasureDefinition.getMeasureDefinitionByName", query="SELECT d FROM MeasureDefinition d WHERE d.measureType = ?1 ")
 })
 public class MeasureDefinition{
   @Id
@@ -27,10 +27,10 @@ public class MeasureDefinition{
       )
   private int idMeasureDefinition;
 
-  @Column(name="measureName")
-  private String measureName;
   @Column(name="measureType")
   private String measureType;
+  @Column(name="measureValueType")
+  private String measureValueType;
 
 
 
@@ -44,16 +44,6 @@ public class MeasureDefinition{
 	}
 
 
-	public String getMeasureName() {
-		return measureName;
-	}
-
-
-	public void setMeasureName(String measureName) {
-		this.measureName = measureName;
-	}
-
-	@XmlTransient
 	public String getMeasureType() {
 		return measureType;
 	}
@@ -61,6 +51,16 @@ public class MeasureDefinition{
 
 	public void setMeasureType(String measureType) {
 		this.measureType = measureType;
+	}
+
+	//@XmlTransient
+	public String getMeasureValueType() {
+		return measureValueType;
+	}
+
+
+	public void setMeasureValueType(String measureValueType) {
+		this.measureValueType = measureValueType;
 	}
 
 
@@ -95,9 +95,9 @@ public class MeasureDefinition{
 	}
 
 
-	public static MeasureDefinition getMeasureDefinitionByName(String measureName) {
+	public static MeasureDefinition getMeasureDefinitionByName(String measureType) {
 		EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
-		MeasureDefinition p = em.createNamedQuery("MeasureDefinition.getMeasureDefinitionByName", MeasureDefinition.class).setParameter(1, measureName).getSingleResult();
+		MeasureDefinition p = em.createNamedQuery("MeasureDefinition.getMeasureDefinitionByName", MeasureDefinition.class).setParameter(1, measureType).getSingleResult();
 		LifeCoachDb_Dao.instance.closeConnections(em);
 		return p;
 	}

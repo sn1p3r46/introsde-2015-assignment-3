@@ -9,17 +9,17 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "LifeStatus")
+@Table(name = "CurrentHealth")
 @NamedQueries({
-	@NamedQuery(name = "LifeStatus.findAll", query = "SELECT l FROM LifeStatus l"),
-	//@NamedQuery(name="LifeStatus.findLifeStatusByMeasureDefinitionAndPerson", query="SELECT ls FROM LifeStatus ls WHERE ls.person = ?1 AND ls.measureDefinition = ?2")
+	@NamedQuery(name = "CurrentHealth.findAll", query = "SELECT l FROM CurrentHealth l"),
+	//@NamedQuery(name="CurrentHealth.findCurrentHealthByMeasureDefinitionAndPerson", query="SELECT ls FROM CurrentHealth ls WHERE ls.person = ?1 AND ls.measureDefinition = ?2")
 })
-public class LifeStatus{
+public class CurrentHealth{
 
 	@Id
 	@ManyToOne
 	@JoinColumn(name="idMeasureHistory", referencedColumnName="idMeasureHistory")
-	private HealthMeasureHistory healthMeasureHistory;
+	private Measure healthMeasureHistory;
 
   @ManyToOne
   @JoinColumn(name="idPerson", referencedColumnName="idPerson")
@@ -29,19 +29,19 @@ public class LifeStatus{
   @JoinColumn(name="idMeasureDefinition", referencedColumnName="idMeasureDefinition")
   private MeasureDefinition measureDefinition;
 
-  @Column(name="measureName")
-  private String measureName;
+  @Column(name="measureType")
+  private String measureType;
 
-  @Column(name="value")
-  private String value;
+  @Column(name="measureValue")
+  private String measureValue;
 
 	@Temporal(TemporalType.DATE)  							// indicates to the persistency manager that this is a Date field
-  @Column(name="timestamp")
-  private Date timestamp;
+  @Column(name="dateRegistered")
+  private Date dateRegistered;
 
-  public static List<LifeStatus> getAll() {
+  public static List<CurrentHealth> getAll() {
 		EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
-	  List<LifeStatus> list = em.createNamedQuery("LifeStatus.findAll", LifeStatus.class).getResultList();
+	  List<CurrentHealth> list = em.createNamedQuery("CurrentHealth.findAll", CurrentHealth.class).getResultList();
 	  LifeCoachDb_Dao.instance.closeConnections(em);
 	  return list;
 	}
@@ -56,7 +56,7 @@ public class LifeStatus{
 		this.person = person;
 	}
 
-	@XmlTransient
+	//@XmlTransient
 	public MeasureDefinition getMeasureDefinition() {
 		return measureDefinition;
 	}
@@ -67,32 +67,32 @@ public class LifeStatus{
 	}
 
 
-	public String getMeasureName() {
-		return measureName;
+	public String getMeasureValueType() {
+		return measureType;
 	}
 
 
-	public void setMeasureName(String measureName) {
-		this.measureName = measureName;
+	public void setMeasureValueType(String measureType) {
+		this.measureType = measureType;
 	}
 
 
-	public String getValue() {
-		return value;
+	public String getMeasureValue() {
+		return measureValue;
 	}
 
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setMeasureValue(String measureValue) {
+		this.measureValue = measureValue;
 	}
 
 
-	public Date getTimestamp() {
-		return timestamp;
+	public Date getDateRegistered() {
+		return dateRegistered;
 	}
 
 
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+	public void setDateRegistered(Date dateRegistered) {
+		this.dateRegistered = dateRegistered;
 	}
 }
