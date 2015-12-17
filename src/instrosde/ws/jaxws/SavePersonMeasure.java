@@ -21,7 +21,7 @@ public class SavePersonMeasure {
     private introsde.models.Measure arg1;
 
     /**
-     *
+     * 
      * @return
      *     returns Long
      */
@@ -30,7 +30,7 @@ public class SavePersonMeasure {
     }
 
     /**
-     *
+     * 
      * @param arg0
      *     the value for the arg0 property
      */
@@ -39,7 +39,7 @@ public class SavePersonMeasure {
     }
 
     /**
-     *
+     * 
      * @return
      *     returns Measure
      */
@@ -48,7 +48,7 @@ public class SavePersonMeasure {
     }
 
     /**
-     *
+     * 
      * @param arg1
      *     the value for the arg1 property
      */

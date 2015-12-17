@@ -16,7 +16,7 @@ public class SavePersonMeasureResponse {
     private introsde.models.Measure _return;
 
     /**
-     *
+     * 
      * @return
      *     returns Measure
      */
@@ -25,7 +25,7 @@ public class SavePersonMeasureResponse {
     }
 
     /**
-     *
+     * 
      * @param _return
      *     the value for the _return property
      */

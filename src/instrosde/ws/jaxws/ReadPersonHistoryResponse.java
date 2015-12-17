@@ -17,7 +17,7 @@ public class ReadPersonHistoryResponse {
     private List<introsde.models.Measure> _return;
 
     /**
-     *
+     * 
      * @return
      *     returns List<Measure>
      */
@@ -26,7 +26,7 @@ public class ReadPersonHistoryResponse {
     }
 
     /**
-     *
+     * 
      * @param _return
      *     the value for the _return property
      */
