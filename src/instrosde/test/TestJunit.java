@@ -134,6 +134,12 @@ public class TestJunit {
       System.out.println("\n--> TEST: readPersonMeasure");
 
       Measure hmh = Measure.getMeasureByPidAndMid(1L,"height",1L);
+      System.out.println("Measure ID: " + hmh.getIdMeasureHistory());
+      System.out.println("Measure name: " + hmh.getMeasureDefinition().getMeasureType());
+      System.out.println("Measure value: " + hmh.getMeasureValue());
+      System.out.println("Measure DATE: " + hmh.getDateRegistered());
+      System.out.println("Measure ValueType: " + hmh.getMeasureDefinition().getMeasureValueType());
+
       assertNotNull(hmh);
    }
 

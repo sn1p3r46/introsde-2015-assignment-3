@@ -160,6 +160,7 @@
                     </fileset>
                 </classpath>
             </java>
+            <antcall target="initDB"/>
         </target>
 
         <target name="initDB">
