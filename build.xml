@@ -135,7 +135,7 @@
                 </classpath>
             </java>
         </target>
-        <target name="start.ws">
+        <target name="start.ws" depends="init, initDB, compile">
             <echo message="app start introsde.endpoint.HealthServicePublisher in ${build.dir}" />
             <java classname="introsde.endpoint.HealthServicePublisher" classpath="${build.dir}" fork="true">
                 <arg value="$JAVA_OPTS  -cp" />
