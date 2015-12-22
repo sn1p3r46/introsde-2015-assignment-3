@@ -23,7 +23,7 @@ This server is developed to receive requests from the [client](https://github.co
 </p>
 
 
-The project is totally developed in [Java](https://en.wikipedia.org/wiki/Java_(programming_language), making use of [Java-ws](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services) and [JPA](https://en.wikipedia.org/wiki/Java_Persistence_API) for the persistency  
+The project is totally developed in [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), making use of [Java-ws](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services) and [JPA](https://en.wikipedia.org/wiki/Java_Persistence_API) for the persistency  
 
 
 ## Premises
