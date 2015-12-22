@@ -16,7 +16,10 @@
 
 This project implements a server that exposes a SOAP web service. The client to execute requests can be found here: ([introsde-assignment-3-client](https://github.com/sn1p3r46/introsde-2015-assignment-3-client)).
 
-This server is developed to receive requests from the [client](https://github.com/sn1p3r46/introsde-2015-assignment-3-client). part of the project. All the [client](https://github.com/sn1p3r46/introsde-2015-assignment-3-client) server interactions make use of the [SOAP](https://en.wikipedia.org/wiki/SOAP)  ([w3c](http://www.w3schools.com/xml/xml_soap.asp)) protocol.
+This server is developed to receive requests from the [client](https://github.com/sn1p3r46/introsde-2015-assignment-3-client). part of the project. All the [client](https://github.com/sn1p3r46/introsde-2015-assignment-3-client) server interactions make use of the [SOAP](https://en.wikipedia.org/wiki/SOAP)  ([w3c](http://www.w3schools.com/xml/xml_soap.asp)) protocol. All the [SOAP](https://en.wikipedia.org/wiki/SOAP) methods exposed by the web service are described in this [Java interface](https://docs.oracle.com/javase/tutorial/java/concepts/interface.html): [HealthServiceInterface.java](https://github.com/sn1p3r46/introsde-2015-assignment-3/blob/master/src%2Finstrosde%2Fws%2FHealthServiceInterface.java) 
+
+
+
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/sn1p3r46/introsde-2015-assignment-3-client/master/images/soapModel.gif" width="350">
