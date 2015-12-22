@@ -18,6 +18,12 @@ This project implements a server that exposes a SOAP web service. The client to 
 
 This server is developed to receive requests from the [client](https://github.com/sn1p3r46/introsde-2015-assignment-3-client). part of the project. All the [client](https://github.com/sn1p3r46/introsde-2015-assignment-3-client) server interactions make use of the [SOAP](https://en.wikipedia.org/wiki/SOAP)  ([w3c](http://www.w3schools.com/xml/xml_soap.asp)) protocol.
 
+<p align="center">
+
+  <img src="https://camo.githubusercontent.com/88c8f7a3fa9fbf125443dddf656b3577ed14eadd/687474703a2f2f646f63732e6f7261636c652e636f6d2f6a61766165652f352f7475746f7269616c2f646f632f666967757265732f6a617877732d73696d706c65436c69656e74416e64536572766963652e676966" width="300">
+</p>
+
+
 The project is totally developed in [Java](https://en.wikipedia.org/wiki/Java_(programming_language), making use of [Java-ws](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services) and [JPA](https://en.wikipedia.org/wiki/Java_Persistence_API) for the persistency  
 
 
