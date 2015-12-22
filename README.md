@@ -101,7 +101,7 @@ ant start.test
 `PLEASE:  If you are running the server locally MIND to change the server address on the client and launch the server application  and before running the client`
 
 <p align="center">
-  <br/><b>[Editor Used:](https://atom.io/)</b><br/>
+  <br/><b><a href="https://atom.io/">Editor Used:</a></b><br/>
   <a href="https://atom.io/">
   <img src="https://cloud.githubusercontent.com/assets/72919/2874231/3af1db48-d3dd-11e3-98dc-6066f8bc766f.png" width="200">
   </a>
