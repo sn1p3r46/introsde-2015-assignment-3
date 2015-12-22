@@ -78,11 +78,11 @@ The project contains some additional files and folders.
 
 `init.sh`: contains some commands to generate the database.
 
-`dbinit.sql`: is the initialization `SQL` script for the database, it can be executed by the `ant initDB`this command will run the `init.sh` bash script delegated to do the job.
+`dbinit.sql`: is the initialization `SQL` script for the database, it can be executed by the `ant initDB` this command will run the `init.sh` bash script delegated to do the job.
 
-`build.xml`: this file ran by `ant`. It will download all the required dependencies using [Apache Ivy](http://ant.apache.org/ivy/). It will also download [Ivy](http://ant.apache.org/ivy/) if it is not installed.
+`build.xml`: this file ran by [Apache Ant](http://ant.apache.org/). It will download all the required dependencies using [Apache Ivy](http://ant.apache.org/ivy/). It will also download [Ivy](http://ant.apache.org/ivy/) if it is not installed.
 
-`ivy.xml`: this file contains all libraries version and names that are needed to rin the server those libraries will be downloaded by [Apache Ivy](http://ant.apache.org/ivy/).
+`ivy.xml`: this file contains all libraries version and names that are needed to run the server those libraries will be downloaded by [Apache Ivy](http://ant.apache.org/ivy/).
 
 
 
