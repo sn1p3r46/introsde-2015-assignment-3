@@ -12,7 +12,7 @@ import javax.xml.ws.Endpoint;
 
 //import introsde.assignment.soap.PeopleImpl;
 
-public class PeoplePublisher {
+public class HealthServicePublisher {
     public static void main(String[] args) throws IllegalArgumentException, IOException, URISyntaxException{
         String PROTOCOL = "http://";
         String HOSTNAME = InetAddress.getLocalHost().getHostAddress();
@@ -32,4 +32,4 @@ public class PeoplePublisher {
         System.out.println("--> Published. Check out "+endpointUrl+"?wsdl");
         Endpoint.publish(endpointUrl, new HealthServiceImplementation());
         }
-    }   
+    }
