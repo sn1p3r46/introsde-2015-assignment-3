@@ -1,6 +1,5 @@
 package introsde.ws;
 
-import static java.lang.Math.toIntExact;
 
 import javax.jws.WebService;
 import java.util.List;
@@ -21,7 +20,7 @@ public class HealthServiceImplementation implements HealthServiceInterface{
   // M #2
   @Override
   public Person readPerson(Long id){
-    return Person.getPersonById(toIntExact(id));
+    return Person.getPersonById((int) (long)(id));
   }
   // M #3
   @Override

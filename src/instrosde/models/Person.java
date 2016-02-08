@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 import javax.xml.bind.annotation.XmlTransient;
 
-import static java.lang.Math.toIntExact;
 
 import introsde.dao.LifeCoachDb_Dao;
 //  nice tutorial on annotations http://www.summa-tech.com/blog/2011/07/29/setting-up-sequential-ids-using-jpa-tablegenerator
@@ -124,7 +123,7 @@ public class Person{
 
 
 	public static void removePerson(Long id){
-		Person p = Person.getPersonById(toIntExact(id));
+		Person p = Person.getPersonById((int) (long)(id));
 		if(p!=null)
 			Person.removePerson(p);
 	}
@@ -170,7 +169,7 @@ public class Person{
 	}
 
 	public static Measure savePersonMeasure(Long id, Measure hmh){
-			Person p = Person.getPersonById(toIntExact(id));
+			Person p = Person.getPersonById((int) (long)(id));
 			hmh.setPerson(p);
 			hmh = Measure.saveMeasure(hmh);
 

@@ -2,7 +2,6 @@ package introsde.models;
 
 import introsde.dao.LifeCoachDb_Dao;
 
-import static java.lang.Math.toIntExact;
 import java.util.Date;
 import java.sql.Timestamp;
 
@@ -134,7 +133,7 @@ public class Measure{
 
 
 		public static List<Measure> readPersonHistory(Long id, String measureType){
-			Person p = Person.getPersonById(toIntExact(id));
+			Person p = Person.getPersonById((int) (long) id);
 			MeasureDefinition md = MeasureDefinition.getMeasureDefinitionByName(measureType);
 			if(p==null || md == null){
 				return null;
@@ -151,11 +150,11 @@ public class Measure{
 
 		public static Measure getMeasureByPidAndMid(Long idPerson,String measureType, Long mid) {
 			EntityManager em = LifeCoachDb_Dao.instance.createEntityManager();
-			Person p = Person.getPersonById(toIntExact(idPerson));
+			Person p = Person.getPersonById((int) (long)(idPerson));
 
 			TypedQuery<Measure> query = em.createNamedQuery("Measure.findByPidAndMid", Measure.class);
 			query.setParameter(1, p);
-			query.setParameter(2, toIntExact(mid));
+			query.setParameter(2, (int) (long)(mid));
 
 			List<Measure> hmh = query.getResultList();
 
@@ -172,7 +171,7 @@ public class Measure{
 
 
 		public static Measure savePersonMeasure(Long id, Measure hmh){
-			Person p = Person.getPersonById(toIntExact(id));
+			Person p = Person.getPersonById((int) (long)(id));
 			if(p!=null){
 				Date date = new Date();
 				Timestamp ts = new Timestamp(date.getTime());
@@ -187,7 +186,7 @@ public class Measure{
 
 		// actually this method is the same of savePersonMeasure.. because the DB FUNCTION IS THE SAME BOTH FOR SAVING OR UPDATING.. :)
 		public static Measure updatePersonMeasure(Long id, Measure hmh){
-			Person p = Person.getPersonById(toIntExact(id));
+			Person p = Person.getPersonById((int) (long)(id));
 			if(p!=null){
 				if(hmh.getDateRegistered()==null){
 				Date date = new Date();
