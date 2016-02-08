@@ -103,7 +103,7 @@
                 </fileset>
             </copy>
         </target>
-        <target name="compile" depends="clean">
+        <target name="compile" depends="init">
             <echo message="Compile target has been called" />
             <mkdir dir="${build.dir}" />
             <echo message="${build.dir} has been created" />
@@ -135,7 +135,7 @@
                 </classpath>
             </java>
         </target>
-        <target name="start.ws" depends="init, initDB, compile">
+        <target name="run" depends="init, compile">
             <echo message="app start introsde.endpoint.HealthServicePublisher in ${build.dir}" />
             <java classname="introsde.endpoint.HealthServicePublisher" classpath="${build.dir}" fork="true">
                 <arg value="$JAVA_OPTS  -cp" />
